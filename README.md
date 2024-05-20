@@ -95,20 +95,20 @@ docker compose -p kitchenpos up -d
 - 주문 목록을 조회할 수 있다.
 
 ## 용어 사전
-메뉴 그룹                     | MenuGroup   | 메뉴를 묶는 그룹
+메뉴 그룹                     | MenuGroup     | 메뉴를 묶는 그룹
 ---
 상품                         | Product      | 판매자가 팔고자 하는 물건 or 서비스
 ---
 메뉴                         | Menu                                | 상품을 그룹화해서 전시하여 고객이 주문을 할 수 있는 단위
 메뉴 가격                     | MenuPrice                           | 고객이 각 메뉴의 주문 요청시 지불할 금액
-메뉴 전시 노출/미노출            | displayStatus('ACTIVE', 'INACTIVE') | 주문이 가능한 메뉴의 상태
+메뉴 전시 노출/미노출            | DisplayStatus('ACTIVE', 'INACTIVE') | 주문이 가능한 메뉴의 상태
 ---
-메뉴 상품                     | MenuProduct | 메뉴에 속하는 상품
+메뉴 상품                     | MenuProduct         | 메뉴에 속하는 상품
 ---
-주문                         | Order       | 고객이 상품을 소비하기 위한 일련의 과정
+주문                         | Order              | 고객이 상품을 소비하기 위한 일련의 과정
 ---
 주문 항목                     | OrderLineItem      | 고객이 구매하려는 메뉴
-주문 항목 가격                 | orderLineItemPrice | 고객의 주문 요청 당시의 메뉴 가격
+주문 항목 가격                 | OrderLineItemPrice | 고객의 주문 요청 당시의 메뉴 가격
 ---
 - 주문 유형                   | OrderType    |
   - 배달 주문                 | DELIVERY     | 배달원이 직접 상품을 전달해주는 주문
@@ -132,7 +132,7 @@ docker compose -p kitchenpos up -d
     - 주문 완료               | COMPLETED   | 판매자가 주문을 완료시킨 상태
 ---
 주문 테이블                    | OrderTable           | 매장 주문 요청 고객이 상품을 소비하는 좌석
-비어있는 주문 테이블              | availableOrderTable | 주문완료가 되지 않은 주문이 존재하지 않아 사용이 가능한 좌석
+비어있는 주문 테이블              | AvailableOrderTable | 주문완료가 되지 않은 주문이 존재하지 않아 사용이 가능한 좌석
 ---
 판매자                         | Seller   | 가게 운영하는 사용자
 고객                          | Customer | 손님
