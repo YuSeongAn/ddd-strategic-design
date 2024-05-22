@@ -144,3 +144,4 @@ COMMON
 비속어/욕설                  | profanity
 
 ## 모델링
+<img width="1503" alt="Screenshot 2024-05-22 at 9 11 40 PM" src="https://github.com/next-step/ddd-strategic-design/assets/124428341/1bb3da02-bdab-4101-a33d-e7bcc4278a26">
