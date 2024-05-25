@@ -117,19 +117,19 @@ docker compose -p kitchenpos up -d
     - 전달                   | SERVED      | 판매자가 상품을 배달원에게 전달한 상태
     - 배달 중                | DELIVERING   | 배달원이 상품을 가지고 배달을 시작한 상태
     - 배달 완료               | DELIVERED   | 배달원이 고객에게 상품을 전달한 상태
-    - 주문 완료               | COMPLETED   | 판매자가 주문을 완료시킨 상태
+    - 주문 종료               | COMPLETED   | 판매자가 주문을 종료시킨 상태
 
   - 매장 주문                 | EAT IN      | 고객이 매장에서 직접 상품을 소비하는 주문
     - 접수 대기               | WAITING     | 사용자가 주문의 접수를 대기하는 상태
     - 접수                   | ACCEPTED    | 판매자가 접수 대기의 주문을 받고 준비하는 상태
     - 전달                   | SERVED      | 판매자가 상품을 매장의 손님에게 전달한 상태
-    - 주문 완료               | COMPLETED   | 판매자가 주문을 완료시킨 상태 
+    - 주문 종료               | COMPLETED   | 판매자가 주문을 종료시킨 상태 
 
   - 포장 주문                 | TAKEOUT     | 고객이 매장에 방문하여 포장해가는 주문
     - 접수 대기               | WAITING     | 사용자가 주문의 접수를 대기하는 상태
     - 접수                   | ACCEPTED    | 판매자가 접수 대기의 주문을 받고 준비하는 상태
     - 전달                   | SERVED      | 판매자가 상품을 매장의 손님에게 전달한 상태
-    - 주문 완료               | COMPLETED   | 판매자가 주문을 완료시킨 상태
+    - 주문 종료               | COMPLETED   | 판매자가 주문을 종료시킨 상태
 ---
 주문 테이블                    | OrderTable           | 매장 주문 요청 고객이 상품을 소비하는 좌석
 비어있는 주문 테이블              | AvailableOrderTable | 주문완료가 되지 않은 주문이 존재하지 않아 사용이 가능한 좌석
@@ -144,4 +144,10 @@ COMMON
 비속어/욕설                  | profanity
 
 ## 모델링
+- MenuGroup의 name을 지정하여 생성한다
+- Product의 name과 price를 지정하여 생성한다
+- Menu의 price와 name과 displayStatus, 속하게될 MenuGroup, 포함하는 MenuProduct의 price와 quantity 목록을 지정하여 메뉴를 생성한다
+  - MenuProduct의 quantity는 0보다 크거나 같아야한다 
+  - Menu의 price는 MenuProduct 목록의 Price의 합보다 작거나 같아야한다
+
 <img width="1503" alt="Screenshot 2024-05-22 at 9 11 40 PM" src="https://github.com/next-step/ddd-strategic-design/assets/124428341/1bb3da02-bdab-4101-a33d-e7bcc4278a26">
