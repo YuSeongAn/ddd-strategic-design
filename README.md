@@ -144,10 +144,37 @@ COMMON
 비속어/욕설                  | profanity
 
 ## 모델링
-- MenuGroup의 name을 지정하여 생성한다
-- Product의 name과 price를 지정하여 생성한다
-- Menu의 price와 name과 displayStatus, 속하게될 MenuGroup, 포함하는 MenuProduct의 price와 quantity 목록을 지정하여 메뉴를 생성한다
-  - MenuProduct의 quantity는 0보다 크거나 같아야한다 
-  - Menu의 price는 MenuProduct 목록의 Price의 합보다 작거나 같아야한다
+- MenuGroup은 name을 가지고있다
+
+
+- Product은 name과 price를 가지고있다
+- Menu는 반드시 하나의 MenuGroup에 속해야한다
+- Menu의 price와 name과 displayStatus를 가진다
+- MenuProduct은 지정한 상품의 quantity와 price와 productId를 가진다
+  - quantity는 0보다 크거나 같아야한다
+  - Menu의 price는 MenuProduct Price의 합보다 작거나 같아야한다
+
+
+- OrderTable은 name, numberOfGuests, occupied를 가진다
+- EatInOrder가 Completed될 경우 Not Occupied table은 clear
+
+
+- EatInOrder는 status, orderDateTime, eatOrderLineItems, orderTableId를 가진다
+  - status는 WAITING, ACCEPTED, SERVED, COMPLETED 중 하나
+- EatInOrderLineItem은 menuPrice, quantity를 가진다
+- EatInOrderLineItem의 menuPrice와 menu의 Price가 다를 경우 주문이 불가능하다
+
+
+- DeliveryOrder는 status, orderDate, deliveryOrderLineItems, deliveryAddress를 가진다
+  - status는 WAITING, ACCEPTED, SERVED, DELIVERING, DELIVERED, COMPLETED 중 하나
+- DeliveryOrderLineItem은 menPrice, quantity를 가진다
+- DeliveryOrderLineItem의 menuPrice와 menu의 Price가 다를 경우 주문이 불가능하다
+- DeliveryOrder이 accept되면 deliveryClient에 requestDelivery
+
+
+- TakeoutOrder는 status, orderDate, takeoutOrderLineItems를 가진다
+  - status는 WAITING, ACCEPTED, SERVED, COMPLETED 중 하나
+- TakeoutOrderLineItem은 menPrice, quantity를 가진다
+- TakeoutOrderLineItem의 menuPrice와 menu의 Price가 다를 경우 주문이 불가능하다
 
 <img width="1503" alt="Screenshot 2024-05-22 at 9 11 40 PM" src="https://github.com/next-step/ddd-strategic-design/assets/124428341/1bb3da02-bdab-4101-a33d-e7bcc4278a26">
