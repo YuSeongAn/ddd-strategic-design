@@ -117,19 +117,19 @@ docker compose -p kitchenpos up -d
     - 전달                   | SERVED      | 판매자가 상품을 배달원에게 전달한 상태
     - 배달 중                | DELIVERING   | 배달원이 상품을 가지고 배달을 시작한 상태
     - 배달 완료               | DELIVERED   | 배달원이 고객에게 상품을 전달한 상태
-    - 주문 완료               | COMPLETED   | 판매자가 주문을 완료시킨 상태
+    - 주문 종료               | COMPLETED   | 판매자가 주문을 종료시킨 상태
 
   - 매장 주문                 | EAT IN      | 고객이 매장에서 직접 상품을 소비하는 주문
     - 접수 대기               | WAITING     | 사용자가 주문의 접수를 대기하는 상태
     - 접수                   | ACCEPTED    | 판매자가 접수 대기의 주문을 받고 준비하는 상태
     - 전달                   | SERVED      | 판매자가 상품을 매장의 손님에게 전달한 상태
-    - 주문 완료               | COMPLETED   | 판매자가 주문을 완료시킨 상태 
+    - 주문 종료               | COMPLETED   | 판매자가 주문을 종료시킨 상태 
 
   - 포장 주문                 | TAKEOUT     | 고객이 매장에 방문하여 포장해가는 주문
     - 접수 대기               | WAITING     | 사용자가 주문의 접수를 대기하는 상태
     - 접수                   | ACCEPTED    | 판매자가 접수 대기의 주문을 받고 준비하는 상태
     - 전달                   | SERVED      | 판매자가 상품을 매장의 손님에게 전달한 상태
-    - 주문 완료               | COMPLETED   | 판매자가 주문을 완료시킨 상태
+    - 주문 종료               | COMPLETED   | 판매자가 주문을 종료시킨 상태
 ---
 주문 테이블                    | OrderTable           | 매장 주문 요청 고객이 상품을 소비하는 좌석
 비어있는 주문 테이블              | AvailableOrderTable | 주문완료가 되지 않은 주문이 존재하지 않아 사용이 가능한 좌석
@@ -144,3 +144,37 @@ COMMON
 비속어/욕설                  | profanity
 
 ## 모델링
+- MenuGroup은 name을 가지고있다
+
+
+- Product은 name과 price를 가지고있다
+- Menu는 반드시 하나의 MenuGroup에 속해야한다
+- Menu의 price와 name과 displayStatus를 가진다
+- MenuProduct은 지정한 상품의 quantity와 price와 productId를 가진다
+  - quantity는 0보다 크거나 같아야한다
+  - Menu의 price는 MenuProduct Price의 합보다 작거나 같아야한다
+
+
+- OrderTable은 name, numberOfGuests, occupied를 가진다
+- EatInOrder가 Completed될 경우 Not Occupied table은 clear
+
+
+- EatInOrder는 status, orderDateTime, eatOrderLineItems, orderTableId를 가진다
+  - status는 WAITING, ACCEPTED, SERVED, COMPLETED 중 하나
+- EatInOrderLineItem은 menuPrice, quantity를 가진다
+- EatInOrderLineItem의 menuPrice와 menu의 Price가 다를 경우 주문이 불가능하다
+
+
+- DeliveryOrder는 status, orderDate, deliveryOrderLineItems, deliveryAddress를 가진다
+  - status는 WAITING, ACCEPTED, SERVED, DELIVERING, DELIVERED, COMPLETED 중 하나
+- DeliveryOrderLineItem은 menPrice, quantity를 가진다
+- DeliveryOrderLineItem의 menuPrice와 menu의 Price가 다를 경우 주문이 불가능하다
+- DeliveryOrder이 accept되면 deliveryClient에 requestDelivery
+
+
+- TakeoutOrder는 status, orderDate, takeoutOrderLineItems를 가진다
+  - status는 WAITING, ACCEPTED, SERVED, COMPLETED 중 하나
+- TakeoutOrderLineItem은 menPrice, quantity를 가진다
+- TakeoutOrderLineItem의 menuPrice와 menu의 Price가 다를 경우 주문이 불가능하다
+
+<img width="1503" alt="Screenshot 2024-05-22 at 9 11 40 PM" src="https://github.com/next-step/ddd-strategic-design/assets/124428341/1bb3da02-bdab-4101-a33d-e7bcc4278a26">
