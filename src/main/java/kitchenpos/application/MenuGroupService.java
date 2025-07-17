@@ -19,6 +19,10 @@ public class MenuGroupService {
 
     @Transactional
     public MenuGroup create(final MenuGroup request) {
+        if (Objects.isNull(request)) {
+            System.out.println(request.getName());
+        }
+
         final String name = request.getName();
         if (Objects.isNull(name) || name.isEmpty()) {
             throw new IllegalArgumentException();
